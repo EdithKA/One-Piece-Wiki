@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.OnePieceWiki"
+        tools:targetApi="31">
+        <activity
+            android:name=".Crews.Members.MembersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Crews.CrewsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Arcs.AddArcActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Favorites.FvArcActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Arcs.ModifyArcActivity"
+            android:exported="false"
+            android:label="@string/title_activity_modify_arc"
+            android:theme="@style/Theme.OnePieceWiki.NoActionBar" />
+        <activity
+            android:name=".Favorites.FvCharactersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Favorites.FavoritesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Characters.AddCharacterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Characters.ModifyCharacterActivity"
+            android:exported="false"
+            android:label="@string/title_activity_modify_character"
+            android:theme="@style/Theme.OnePieceWiki.NoActionBar" />
+        <activity
+            android:name=".Characters.CharactersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Arcs.ArcsActivity" />
+    </application>
+
+</manifest>
