@@ -112,79 +112,77 @@ class Model(private val context: Context) {
         }
     }
 
-    fun getAllFavoriteCharacters(
-        listener: (List<FavoriteCharacter_data>) -> Unit,
-        errorListener: (Throwable) -> Unit
-    ) = CoroutineScope(Dispatchers.Main).launch {
-        val favoriteCharacterDataList = withContext(Dispatchers.IO) {
-            database.dao.getAllFavoriteCharacters()
-        }
-
-        val characterDataList = withContext(Dispatchers.IO) {
-            database.dao.getAllCharacters()
-        }
-
-        // Comprobar y eliminar personajes favoritos inexistentes
-        val validFavoriteCharacters = mutableListOf<FavoriteCharacter_data>()
-        for (favoriteCharacter in favoriteCharacterDataList) {
-            val characterExists = characterDataList.any { it.frenchName == favoriteCharacter.frenchName }
-            if (characterExists) {
-                validFavoriteCharacters.add(favoriteCharacter)
-            } else {
-                deleteFavoriteCharacter(favoriteCharacter) //Eliminamos el personaje de la lista de favoritos
-            }
-        }
-
-        listener(validFavoriteCharacters)
-    }
-
-    fun insertFavoriteCharacter(character: FavoriteCharacter_data) {
-        CoroutineScope(Dispatchers.IO).launch {
-            database.dao.insertFavoriteCharacter(character)
-        }
-    }
-
-    fun deleteFavoriteCharacter(character: FavoriteCharacter_data) {
-        CoroutineScope(Dispatchers.IO).launch {
-            database.dao.deleteFavoriteCharacter(character)
-        }
-    }
-
+    @OptIn(DelicateCoroutinesApi::class)
     fun getAllFavoriteArcs(
-        listener: (List<FavoriteArcs_data>) -> Unit,
+        listener: (List<Arc_data>) -> Unit,
         errorListener: (Throwable) -> Unit
     ) = CoroutineScope(Dispatchers.Main).launch {
         val favoriteArcDataList = withContext(Dispatchers.IO) {
             database.dao.getAllFavoriteArcs()
         }
-
-        val arcDataList = withContext(Dispatchers.IO) {
-            database.dao.getAllArcs()
-        }
-
-        // Comprobar y eliminar arcos favoritos inexistentes
-        val validFavoriteArcs = mutableListOf<FavoriteArcs_data>()
-        for (favoriteArc in favoriteArcDataList) {
-            val arcExists = arcDataList.any { it.arc_title == favoriteArc.arc_title }
-            if (arcExists) {
-                validFavoriteArcs.add(favoriteArc)
+        if (favoriteArcDataList.isEmpty()) {
+            // Manejar el caso de que no haya arcos favoritos
+            listener(emptyList())
+        } else {
+            val arcDataList = withContext(Dispatchers.IO) {
+                database.dao.getAllArcs()
+            }
+            if (arcDataList.isEmpty()) {
+                try {
+                    network.getArcs(
+                        listener = { fetchedArcDataList ->
+                            GlobalScope.launch {
+                                database.dao.insertAllArcs(fetchedArcDataList)
+                            }
+                            listener(fetchedArcDataList)
+                        },
+                        errorListener = { error ->
+                            errorListener(error)
+                        }
+                    )
+                } catch (error: Exception) {
+                    errorListener(error)
+                }
             } else {
-                deleteFavoriteArc(favoriteArc) // Método para eliminar el arco favorito
+                listener(arcDataList)
             }
         }
-
-        listener(validFavoriteArcs)
     }
 
-    fun insertFavoriteArc(arc: FavoriteArcs_data) {
-        CoroutineScope(Dispatchers.IO).launch {
-            database.dao.insertFavoriteArcs(arc)
+    @OptIn(DelicateCoroutinesApi::class)
+    fun getAllFavoriteCharacters(
+        listener: (List<Character_data>) -> Unit,
+        errorListener: (Throwable) -> Unit
+    ) = CoroutineScope(Dispatchers.Main).launch {
+        val favoriteCharacterDataList = withContext(Dispatchers.IO) {
+            database.dao.getAllFavoriteCharacters()
         }
-    }
-
-    fun deleteFavoriteArc(arc: FavoriteArcs_data) {
-        CoroutineScope(Dispatchers.IO).launch {
-            database.dao.deleteFavoriteArcs(arc)
+        if (favoriteCharacterDataList.isEmpty()) {
+            // Manejar el caso de que no haya personajes favoritos
+            listener(emptyList())
+        } else {
+            val characterDataList = withContext(Dispatchers.IO) {
+                database.dao.getAllCharacters()
+            }
+            if (characterDataList.isEmpty()) {
+                try {
+                    network.getAllCharacters(
+                        listener = { fetchedCharacterDataList ->
+                            GlobalScope.launch {
+                                database.dao.insertAllCharacters(fetchedCharacterDataList)
+                            }
+                            listener(fetchedCharacterDataList)
+                        },
+                        errorListener = { error ->
+                            errorListener(error)
+                        }
+                    )
+                } catch (error: Exception) {
+                    errorListener(error)
+                }
+            } else {
+                listener(characterDataList)
+            }
         }
     }
 
@@ -255,13 +253,6 @@ class Model(private val context: Context) {
         return@withContext database.dao.checkArcExist(name)
     }
 
-    suspend fun checkFavoriteArcsExists(name: String): Boolean = withContext(Dispatchers.IO) {
-        return@withContext database.dao.checkFavoriteArcsExists(name)
-    }
-
-    suspend fun checkFavoriteCharacterExists(name: String): Boolean = withContext(Dispatchers.IO) {
-        return@withContext database.dao.checkFavoriteCharacterExists(name)
-    }
 
     fun searchCharacterName(name: String,
                                  listener: Response.Listener<List<Character_data>>)= GlobalScope.launch(Dispatchers.Main){

@@ -102,7 +102,7 @@
         android:layout_width="112dp"
         android:layout_height="57dp"
         android:layout_marginTop="520dp"
-        android:text="Favorite"
+        android:text="Favorito"
         android:textColor="#FBFAFA"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

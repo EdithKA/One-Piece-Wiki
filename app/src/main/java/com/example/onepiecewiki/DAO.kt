@@ -58,32 +58,13 @@ interface DAO {
 
     //Favoritos
     //Personajes
-    @Query("SELECT * FROM FavoriteCharacter_data")
-    suspend fun getAllFavoriteCharacters(): List<FavoriteCharacter_data>
+    @Query("SELECT * FROM Character_data WHERE character_favorite = 'Sí' ")
+    suspend fun getAllFavoriteCharacters(): List<Character_data>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFavoriteCharacter(character: FavoriteCharacter_data)
-
-    @Delete
-    suspend fun deleteFavoriteCharacter(character: FavoriteCharacter_data)
-
-    @Query("SELECT EXISTS(SELECT 1 FROM FavoriteCharacter_data WHERE french_name = :name LIMIT 1)")
-    suspend fun checkFavoriteCharacterExists(name: String): Boolean
 
     //Arcos
-    @Query("SELECT * FROM FavoriteArcs_data")
-    suspend fun getAllFavoriteArcs(): List<FavoriteArcs_data>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFavoriteArcs(arcs: FavoriteArcs_data)
-
-    @Delete
-    suspend fun deleteFavoriteArcs(arcs: FavoriteArcs_data)
-
-    @Query("SELECT EXISTS(SELECT 1 FROM FavoriteArcs_data WHERE arc_title = :name LIMIT 1)")
-    suspend fun checkFavoriteArcsExists(name: String): Boolean
-
-
+    @Query("SELECT * FROM Arc_data WHERE arc_favorite = 'Sí'")
+    suspend fun getAllFavoriteArcs(): List<Arc_data>
 
     //Tripulaciones
     @Insert(onConflict = OnConflictStrategy.IGNORE)
