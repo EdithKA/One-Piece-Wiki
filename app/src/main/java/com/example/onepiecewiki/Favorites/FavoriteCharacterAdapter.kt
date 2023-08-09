@@ -5,11 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.onepiecewiki.Characters.CharacterAdapter
+import com.example.onepiecewiki.Characters.Character_data
 import com.example.onepiecewiki.R
 
 class FavoriteCharacterAdapter(private val presenter: FavoriteCharactersPresenter) : RecyclerView.Adapter<FavoriteCharacterAdapter.FavoriteCharacterViewHolder>() {
 
-    private val characters: MutableList<FavoriteCharacter_data> = mutableListOf()
+    private val characters: MutableList<Character_data> = mutableListOf()
 
 
     //Mostramos el contenido de la lista de personajes favoritos utilizando un layout auxiliar "row_list"
@@ -32,7 +34,7 @@ class FavoriteCharacterAdapter(private val presenter: FavoriteCharactersPresente
     }
 
     //Obtenemos los datos de la lista de personajes favoritos para mostrarlos
-    fun setData(data: List<FavoriteCharacter_data>) {
+    fun setData(data: List<Character_data>) {
         characters.clear()
         characters.addAll(data)
         notifyDataSetChanged()
@@ -45,7 +47,7 @@ class FavoriteCharacterAdapter(private val presenter: FavoriteCharactersPresente
         private val id: TextView = itemView.findViewById(R.id.id_list)
         private val name: TextView = itemView.findViewById(R.id.name_list)
 
-        fun bind(character: FavoriteCharacter_data) {
+        fun bind(character: Character_data) {
             id.text = character.id.toString()
             name.text = character.frenchName
         }

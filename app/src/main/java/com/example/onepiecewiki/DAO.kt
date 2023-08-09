@@ -2,9 +2,7 @@ package com.example.onepiecewiki
 
 import androidx.room.*
 import com.example.onepiecewiki.Arcs.Arc_data
-import com.example.onepiecewiki.Favorites.FavoriteArcs_data
 import com.example.onepiecewiki.Characters.Character_data
-import com.example.onepiecewiki.Favorites.FavoriteCharacter_data
 import com.example.onepiecewiki.Crews.Crew_data
 
 @Dao

@@ -77,7 +77,7 @@ class AddCharacterActivity : AppCompatActivity() {
     fun returnMainActivity() { //Para volver a la pantalla principal
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish()
+
     }
 
     private fun showToast(message: String) {

@@ -1,5 +1,6 @@
 package com.example.onepiecewiki.Favorites
 
+import com.example.onepiecewiki.Characters.Character_data
 import com.example.onepiecewiki.Model
 
 class FavoriteCharactersPresenter(private val view: FvCharactersActivity) {
@@ -22,7 +23,7 @@ class FavoriteCharactersPresenter(private val view: FvCharactersActivity) {
 
     //No debe ocurrir nada al pulsar sobre un personaje de la lista de personajes
     //favoritos asi que dejo la función vacia para que no falle la aplicación al pulsar uno
-    fun onCharacterClicked(character: FavoriteCharacter_data) {
+    fun onCharacterClicked(character: Character_data) {
 
     }
 

@@ -52,6 +52,6 @@ class AddArcActivity : AppCompatActivity() {
     fun returnMainActivity() {  //Al guardar el arco volvemos a la pantalla principal
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish()
+        
     }
 }

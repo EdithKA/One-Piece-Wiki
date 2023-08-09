@@ -49,7 +49,7 @@ class ArcsActivity : AppCompatActivity() {
 
             val intent = Intent(this, AddArcActivity::class.java)
             startActivity(intent)
-            finish()
+
         }
     }
 

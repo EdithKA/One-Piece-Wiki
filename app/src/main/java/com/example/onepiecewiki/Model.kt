@@ -3,11 +3,9 @@ package com.example.onepiecewiki
 import android.content.Context
 import com.android.volley.Response
 import com.example.onepiecewiki.Arcs.Arc_data
-import com.example.onepiecewiki.Favorites.FavoriteArcs_data
 
 import com.example.onepiecewiki.Characters.Character_data
 import com.example.onepiecewiki.Crews.Crew_data
-import com.example.onepiecewiki.Favorites.FavoriteCharacter_data
 import kotlinx.coroutines.*
 
 class Model(private val context: Context) {
@@ -112,79 +110,42 @@ class Model(private val context: Context) {
         }
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
-    fun getAllFavoriteArcs(
-        listener: (List<Arc_data>) -> Unit,
-        errorListener: (Throwable) -> Unit
-    ) = CoroutineScope(Dispatchers.Main).launch {
-        val favoriteArcDataList = withContext(Dispatchers.IO) {
-            database.dao.getAllFavoriteArcs()
-        }
-        if (favoriteArcDataList.isEmpty()) {
-            // Manejar el caso de que no haya arcos favoritos
-            listener(emptyList())
-        } else {
-            val arcDataList = withContext(Dispatchers.IO) {
-                database.dao.getAllArcs()
-            }
-            if (arcDataList.isEmpty()) {
-                try {
-                    network.getArcs(
-                        listener = { fetchedArcDataList ->
-                            GlobalScope.launch {
-                                database.dao.insertAllArcs(fetchedArcDataList)
-                            }
-                            listener(fetchedArcDataList)
-                        },
-                        errorListener = { error ->
-                            errorListener(error)
-                        }
-                    )
-                } catch (error: Exception) {
-                    errorListener(error)
-                }
-            } else {
-                listener(arcDataList)
-            }
-        }
-    }
-
+    //Favoritos
     @OptIn(DelicateCoroutinesApi::class)
     fun getAllFavoriteCharacters(
         listener: (List<Character_data>) -> Unit,
         errorListener: (Throwable) -> Unit
     ) = CoroutineScope(Dispatchers.Main).launch {
-        val favoriteCharacterDataList = withContext(Dispatchers.IO) {
+        val favoriteCharactersList = withContext(Dispatchers.IO) {
             database.dao.getAllFavoriteCharacters()
         }
-        if (favoriteCharacterDataList.isEmpty()) {
-            // Manejar el caso de que no haya personajes favoritos
-            listener(emptyList())
+
+        if (favoriteCharactersList.isEmpty()) {
+            errorListener(Throwable("No existen personajes favoritos"))
         } else {
-            val characterDataList = withContext(Dispatchers.IO) {
-                database.dao.getAllCharacters()
-            }
-            if (characterDataList.isEmpty()) {
-                try {
-                    network.getAllCharacters(
-                        listener = { fetchedCharacterDataList ->
-                            GlobalScope.launch {
-                                database.dao.insertAllCharacters(fetchedCharacterDataList)
-                            }
-                            listener(fetchedCharacterDataList)
-                        },
-                        errorListener = { error ->
-                            errorListener(error)
-                        }
-                    )
-                } catch (error: Exception) {
-                    errorListener(error)
-                }
-            } else {
-                listener(characterDataList)
-            }
+            listener(favoriteCharactersList)
         }
     }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    fun getAllFavoriteArcs(
+        listener: (List<Arc_data>) -> Unit,
+        errorListener: (Throwable) -> Unit
+    ) = CoroutineScope(Dispatchers.Main).launch {
+        val favoriteArcsList = withContext(Dispatchers.IO) {
+            database.dao.getAllFavoriteArcs()
+        }
+
+        if (favoriteArcsList.isEmpty()) {
+            errorListener(Throwable("No existen arcos favoritos"))
+        } else {
+            listener(favoriteArcsList)
+        }
+    }
+
+
+
+
 
     fun getAllCrews(
         listener: (List<Crew_data>) -> Unit,

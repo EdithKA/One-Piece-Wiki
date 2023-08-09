@@ -61,7 +61,7 @@ class CharactersActivity : AppCompatActivity() {
         addButton.setOnClickListener {
             val intent = Intent(this, AddCharacterActivity::class.java)
             startActivity(intent)
-            finish()
+
         }
     }
 

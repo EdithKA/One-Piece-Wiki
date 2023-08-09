@@ -1,5 +1,6 @@
 package com.example.onepiecewiki.Favorites
 
+import com.example.onepiecewiki.Arcs.Arc_data
 import com.example.onepiecewiki.Model
 
 class FavoriteArcsPresenter(private val view: FvArcActivity) {
@@ -20,7 +21,7 @@ class FavoriteArcsPresenter(private val view: FvArcActivity) {
 
     //No tiene que ocurrir nada cuando se selecciona un arco de la lista de favoritos así
     //que dejo ésta función vacía para que la aplicacion no falle
-    fun onFavoriteArcClicked(character: FavoriteArcs_data) {
+    fun onFavoriteArcClicked(character: Arc_data) {
 
     }
 }

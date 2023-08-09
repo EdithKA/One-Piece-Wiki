@@ -5,15 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.onepiecewiki.Arcs.Arc_data
-import com.example.onepiecewiki.Favorites.FavoriteArcs_data
 import com.example.onepiecewiki.Characters.Character_data
 import com.example.onepiecewiki.Crews.Crew_data
-import com.example.onepiecewiki.Favorites.FavoriteCharacter_data
 
 
 @Database(
-    entities = [Arc_data::class, Character_data::class, FavoriteCharacter_data::class, FavoriteArcs_data::class, Crew_data::class],
-    version = 10,
+    entities = [Arc_data::class, Character_data::class, Crew_data::class],
+    version = 11,
     exportSchema = false
 )
 abstract class WikiDatabase : RoomDatabase() {

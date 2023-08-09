@@ -77,7 +77,7 @@ class ModifyCharacterActivity : AppCompatActivity() {
             val birthday = birthdayEditText.text.toString()
             val favorite = presenter.isFavorite
 
-            presenter.save(name, job, size, birthday, age, bounty, status)
+            presenter.save(name, job, size, birthday, age, bounty, status, favorite)
         }
     }
 
@@ -119,6 +119,6 @@ class ModifyCharacterActivity : AppCompatActivity() {
     fun returnMainActivity() { //Volver a la pantalla principal
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish()
+
     }
 }

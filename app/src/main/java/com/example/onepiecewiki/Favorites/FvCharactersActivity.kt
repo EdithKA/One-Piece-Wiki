@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.onepiecewiki.Characters.Character_data
 import com.example.onepiecewiki.R
 
 class FvCharactersActivity : AppCompatActivity() {
@@ -33,7 +34,7 @@ class FvCharactersActivity : AppCompatActivity() {
 
     }
 
-    fun showCharacters(characters: List<FavoriteCharacter_data>) { //Mostrar la lista de personajes favoritos
+    fun showCharacters(characters: List<Character_data>) { //Mostrar la lista de personajes favoritos
         adapter.setData(characters)
     }
 

@@ -98,6 +98,6 @@ class ModifyArcActivity : AppCompatActivity() {
     fun returnMainActivity() { //Volvemos a la pantalla de inicio
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish()
+
     }
 }

@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.onepiecewiki.Arcs.Arc_data
 import com.example.onepiecewiki.R
 
 class FvArcActivity : AppCompatActivity() {
@@ -32,7 +33,7 @@ class FvArcActivity : AppCompatActivity() {
 
     }
 
-    fun showArcs(arcs: List<FavoriteArcs_data>) {
+    fun showArcs(arcs: List<Arc_data>) {
         adapter.setData(arcs)
     }
 

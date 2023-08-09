@@ -5,11 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.onepiecewiki.Arcs.Arc_data
 import com.example.onepiecewiki.R
 
 class FavoriteArcsAdapter(private val presenter: FavoriteArcsPresenter) : RecyclerView.Adapter<FavoriteArcsAdapter.FavoriteArcViewHolder>() {
 
-    private val arcs: MutableList<FavoriteArcs_data> = mutableListOf()
+    private val arcs: MutableList<Arc_data> = mutableListOf()
 
 
     //Utiliza el layout auxiliar "row_list" para mostar los elementos de nuestra lista en el recyclerview
@@ -33,7 +34,7 @@ class FavoriteArcsAdapter(private val presenter: FavoriteArcsPresenter) : Recycl
     }
 
     //Muestra la información dentro de la lista de arcos favoritos en el recyclerview
-    fun setData(data: List<FavoriteArcs_data>) {
+    fun setData(data: List<Arc_data>) {
         arcs.clear()
         arcs.addAll(data)
         notifyDataSetChanged()
@@ -44,7 +45,7 @@ class FavoriteArcsAdapter(private val presenter: FavoriteArcsPresenter) : Recycl
         private val id: TextView = itemView.findViewById(R.id.id_list)
         private val name: TextView = itemView.findViewById(R.id.name_list)
 
-        fun bind(arc: FavoriteArcs_data) {
+        fun bind(arc: Arc_data) {
             id.text = arc.id.toString()
             name.text = arc.arc_title
 

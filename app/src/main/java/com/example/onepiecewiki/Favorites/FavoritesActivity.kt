@@ -26,16 +26,10 @@ class FavoritesActivity : AppCompatActivity() {
 
 
         //Funciones para el funcionamiento de los botones
-        returnMain()
         favoriteCharacters()
         favoriteArcs()
     }
 
-    private fun returnMain(){ //Volver a la pantalla de inicio
-        backButton.setOnClickListener {
-            presenter.toMain()
-        }
-    }
 
     private fun favoriteCharacters(){ //Ir a la pantalla de personajes favoritos
         characterButton.setOnClickListener {
@@ -50,6 +44,6 @@ class FavoritesActivity : AppCompatActivity() {
     }
     override fun startActivity(intent: Intent) {
         super.startActivity(intent)
-        finish()
+
     }
 }

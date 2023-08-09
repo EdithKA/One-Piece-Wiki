@@ -1,10 +1,6 @@
 package com.example.onepiecewiki.Characters
 
-import com.example.onepiecewiki.Favorites.FavoriteCharacter_data
 import com.example.onepiecewiki.Model
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class ModifyCharacterPresenter(private val view: ModifyCharacterActivity) {
 
@@ -37,7 +33,8 @@ class ModifyCharacterPresenter(private val view: ModifyCharacterActivity) {
         birthday: String,
         age: String,
         bounty: String,
-        status: String
+        status: String,
+        favorite : String
     ) {
         //Actualizamos el personaje con los nuevos datos modificados
         val updatedCharacter = Character_data(
