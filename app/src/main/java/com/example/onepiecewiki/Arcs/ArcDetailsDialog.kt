@@ -37,8 +37,6 @@ class ArcDetailsDialog: DialogFragment() {
                 val intent = Intent(requireContext(), ModifyArcActivity::class.java)
                 intent.putExtra("arc", arc)
                 startActivity(intent)
-                activity.finish()
-
                 dialog.dismiss()
             }
 

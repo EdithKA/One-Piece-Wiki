@@ -39,7 +39,6 @@ class CharacterDetailsDialog : DialogFragment() {
                 val intent = Intent(requireContext(), ModifyCharacterActivity::class.java)
                 intent.putExtra("character", character)
                 startActivity(intent)
-                activity.finish()
                 dialog.dismiss()
             }
 
