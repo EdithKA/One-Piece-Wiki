@@ -10,6 +10,8 @@ import com.example.onepiecewiki.Crews.CrewsActivity
 class MainPresenter(private val view: MainActivity) {
 
 
+    private val model: Model = Model(view)
+
     fun onExitButtonClicked() { //Botón de salir
         view.finish()
     }
@@ -35,6 +37,21 @@ class MainPresenter(private val view: MainActivity) {
     fun onTripulationButtonClicked() { //Botón de la lista de tripulaciones
         val intent = Intent(view, CrewsActivity::class.java)
         view.startActivity(intent)
+
+    }
+
+    //Observamos si existen favoritos
+    fun checkFavorites(){
+
+        val favoriteArcs = model.database.dao.getAllFavoriteArcs();
+        val favoriteCharacters = model.database.dao.getAllFavoriteCharacters();
+
+        if(favoriteArcs.isNotEmpty() || favoriteCharacters.isNotEmpty()) {
+            onFavoritesButtonClicked()
+        }
+        else{
+            view.showMessage("No existen favoritos")
+        }
 
     }
 }

@@ -1,5 +1,6 @@
 package com.example.onepiecewiki.Characters
 
+import android.media.Image
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.ColumnInfo
@@ -18,7 +19,8 @@ data class Character_data(
     @ColumnInfo(name = "crew_id") val crewId: Int?,
     @ColumnInfo(name = "fruit_id") val fruitId: Int?,
     @ColumnInfo(name = "2nd_fruit_id") val secondFruitId: Int?,
-    val character_favorite : String  = "No"
+    val character_favorite : String  = "No",
+
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),

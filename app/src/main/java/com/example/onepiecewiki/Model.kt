@@ -9,7 +9,7 @@ import com.example.onepiecewiki.Crews.Crew_data
 import kotlinx.coroutines.*
 
 class Model(private val context: Context) {
-    private val database = WikiDatabase.getInstance(context)
+    val database = WikiDatabase.getInstance(context)
     private val network: Network = Network.getInstance(context)
 
     @OptIn(DelicateCoroutinesApi::class)

@@ -52,7 +52,8 @@ class MainActivity : AppCompatActivity() {
     private fun passToFav() { //Botón para acceder a la lista de favoritos
         favBt = findViewById(R.id.botonFav)
         favBt.setOnClickListener {
-            presenter.onFavoritesButtonClicked()
+
+            presenter.checkFavorites()
         }
     }
 

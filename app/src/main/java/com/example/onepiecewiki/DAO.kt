@@ -23,46 +23,46 @@ interface DAO {
 
     //Personajes
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertCharacter(character: Character_data)
+    fun insertCharacter(character: Character_data)
 
     @Update
     fun updateCharacter(character: Character_data)
 
     @Query("SELECT EXISTS(SELECT 1 FROM Character_data WHERE french_name = :name LIMIT 1)")
-    suspend fun checkCharacterExists(name: String): Boolean
+    fun checkCharacterExists(name: String): Boolean
 
     @Query("SELECT MAX(id) FROM Character_data")
-    suspend fun getLastCharacterId(): Int?
+    fun getLastCharacterId(): Int?
 
     @Delete
-    suspend fun deleteCharacter(character: Character_data)
+    fun deleteCharacter(character: Character_data)
 
     //Arcos
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertArc(arc: Arc_data)
+    fun insertArc(arc: Arc_data)
 
     @Update
     fun updateArc(arc: Arc_data)
 
     @Query("SELECT EXISTS(SELECT 1 FROM Arc_data WHERE arc_title = :name LIMIT 1)")
-    suspend fun checkArcExist(name: String): Boolean
+    fun checkArcExist(name: String): Boolean
 
     @Query("SELECT MAX(id) FROM Arc_data")
-    suspend fun getLastArc(): Int?
+    fun getLastArc(): Int?
 
     @Delete
-    suspend fun deleteArc(arc: Arc_data)
+    fun deleteArc(arc: Arc_data)
 
     //Favoritos
     //Personajes
     @Query("SELECT * FROM Character_data WHERE character_favorite = 'Sí' ")
-    suspend fun getAllFavoriteCharacters(): List<Character_data>
+    fun getAllFavoriteCharacters(): List<Character_data>
 
 
     //Arcos
     @Query("SELECT * FROM Arc_data WHERE arc_favorite = 'Sí'")
-    suspend fun getAllFavoriteArcs(): List<Arc_data>
+    fun getAllFavoriteArcs(): List<Arc_data>
 
     //Tripulaciones
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -72,10 +72,10 @@ interface DAO {
     fun getAllCrews(): List<Crew_data>
 
     @Query("SELECT * FROM character_data WHERE crew_id = :crewId")
-    suspend fun getCrewMembers(crewId: String): List<Character_data>
+    fun getCrewMembers(crewId: String): List<Character_data>
 
     @Query("SELECT COUNT(*) FROM Character_data WHERE crew_id = :crewId")
-    suspend fun getCrewsMembersCount(crewId: String): Int
+    fun getCrewsMembersCount(crewId: String): Int
 
 
     @Query("SELECT * FROM Character_data WHERE french_name LIKE :name || '%' ORDER BY id")
@@ -83,6 +83,7 @@ interface DAO {
 
     @Query("SELECT * FROM Crew_data WHERE id LIKE :crew_id")
     fun getCrewById(crew_id: Int): Crew_data
+
 
 
 }

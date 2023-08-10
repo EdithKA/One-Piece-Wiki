@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import com.example.onepiecewiki.R
 
 class FavoritesActivity : AppCompatActivity() {
@@ -33,17 +34,21 @@ class FavoritesActivity : AppCompatActivity() {
 
     private fun favoriteCharacters(){ //Ir a la pantalla de personajes favoritos
         characterButton.setOnClickListener {
-            presenter.toFavoriteCharacters()
+            presenter.checkFavoritesCharacters()
         }
     }
 
     private fun favoriteArcs(){ //Ir a la pantalla de arcos favoritos
         arcButton.setOnClickListener {
-            presenter.toFavoriteArcs()
+            presenter.checkFavoritesArcs()
         }
     }
     override fun startActivity(intent: Intent) {
         super.startActivity(intent)
 
+    }
+
+    fun showMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
